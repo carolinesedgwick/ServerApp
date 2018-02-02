@@ -24,6 +24,9 @@ namespace ServerApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors(setup => {
+                setup.AddPolicy("all", builder => builder.AllowAnyOrigin());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,7 +36,7 @@ namespace ServerApp
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("all");
             app.UseMvc();
         }
     }
